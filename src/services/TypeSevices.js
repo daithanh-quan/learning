@@ -1,0 +1,1 @@
+export const GROUP_ID = 'GP01'; // mã nhóm lấy từ api
