@@ -1,0 +1,2 @@
+export const HIDDEN_DRAWER = 'HIDDEN_DRAWER';
+export const DISPLAY_DRAWER = 'DISPLAY_DRAWER';

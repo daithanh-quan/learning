@@ -6,8 +6,11 @@ import { getCategoryCourse } from '../../Redux/action/CourseAction'
 import { Select } from 'antd';
 import { history } from '../../App'
 import { EMPTY_INPUT_SEARCH, SEARCH } from '../../Redux/types/CourseTypes'
+import { accessToken, INFO_USER } from '../../Redux/types/UserType'
+import { Menu } from 'antd';
+import { DISPLAY_DRAWER } from '../../Redux/types/DrawerType'
 const { Option } = Select;
-
+const { SubMenu } = Menu;
 const Header = (props) => {
   const dispatch = useDispatch()
   const courses = useSelector(state => state.CategoryCourseReducer.course) // lấy course từ api ra để hiện lên ui
@@ -33,6 +36,7 @@ const Header = (props) => {
   }
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (!value) return history.push('/')
     if (value !== 'undefined') {
       await history.push(`/timkiem/${value}`)
       dispatch({
@@ -45,7 +49,9 @@ const Header = (props) => {
   return (
     <header className=" bg-gray-200 m ">
       <div className="container px-3 flex justify-between  h-16 mx-auto items-center">
-        <NavLink to="/" exact className="hover:text-sky-400 hover:no-underline ">
+        <NavLink to="/" exact className="hover:text-sky-400 hover:no-underline" onClick={() => {
+          dispatch(getCategoryCourse())
+        }}>
           <div className="flex items-center">
             <ImStack className="h-16 mr-2 " />
             <p className="font-extrabold text-2xl mb-0">Full stack</p>
@@ -85,10 +91,45 @@ const Header = (props) => {
               }}
             />
           </form>
-          <button type="button" className="hidden px-4 py-2 font-semibold rounded lg:block bg-gradient-to-bl from-sky-400 to-blue-500 text-white hover:opacity-60 ">Đăng ký</button>
-          <button type="button" className="hidden px-4 py-2 font-semibold rounded lg:block  bg-gradient-to-bl from-sky-400 to-blue-500 text-white hover:opacity-60 ">Đăng nhập</button>
+          {/* kiểm tra trường hợp nếu user đã login thì hiển thị lên thanh header */}
+          {localStorage.getItem(INFO_USER) && localStorage.getItem(accessToken) ? <div className="hidden lg:flex items-center  ">
+            <span className="px-1 text-sky-700">Xin chào </span>
+            <span className="hidden px-2 py-1 font-semibold rounded-full lg:block  bg-gradient-to-bl from-sky-400 to-blue-500 text-white hover:opacity-60 ">{JSON.parse(localStorage.getItem(INFO_USER)).hoTen.substr(0, 2)}</span>
+            <Menu>
+              <SubMenu key="sub1">
+                <Menu.Item key="1"
+                  onClick={() => {
+                    history.push('/thongtintaikhoan')
+                  }}
+                >Thông tin cá nhân</Menu.Item>
+                <Menu.Item key="2"
+                  onClick={async () => {
+                    await localStorage.removeItem(accessToken);
+                    history.push('/')
+                  }}
+                >
+                  Đăng xuất</Menu.Item>
+              </SubMenu>
+            </Menu>
+          </div> : <div className="flex">
+            <button type="button" className="hidden px-4 py-2 font-semibold rounded lg:block bg-gradient-to-bl from-sky-400 to-blue-500 text-white hover:opacity-60 mx-1"
+              onClick={() => {
+                history.push('/dangky')
+              }}
+            >
+              Đăng ký</button>
+            <button type="button" className="hidden px-4 py-2 font-semibold rounded lg:block  bg-gradient-to-bl from-sky-400 to-blue-500 text-white hover:opacity-60 "
+              onClick={() => {
+                history.push('/dangnhap')
+              }}
+            >
+              Đăng nhập</button></div>}
         </div>
-        <button title="Open menu" type="button" className="p-4 lg:hidden">
+        <button type="primary" className="p-4 lg:hidden text-white hover:text-sky-500"
+          onClick={() => {
+            dispatch({ type: DISPLAY_DRAWER })
+          }}
+        >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 text-coolGray-800">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
           </svg>

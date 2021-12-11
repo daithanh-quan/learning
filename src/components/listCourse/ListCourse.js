@@ -2,12 +2,14 @@ import React, { memo } from 'react'
 import Slider from "react-slick";
 import { SampleNextArrow } from './SampleNextArrow';
 import { SamplePrevArrow } from './SamplePrevArrow';
-
+import { history } from '../../App'
+import { INFO_USER } from '../../Redux/types/UserType';
 var settings = { // setting để custom của thư viện slick
   className: 'w-5/6',
   dots: true,
   infinite: false,
   speed: 500,
+  breakpoint: 1280,
   slidesToShow: 4,
   slidesToScroll: 4,
   initialSlide: 0,
@@ -19,8 +21,13 @@ var settings = { // setting để custom của thư viện slick
       settings: {
         slidesToShow: 3,
         slidesToScroll: 3,
-        infinite: true,
-        dots: true
+      }
+    },
+    {
+      breakpoint: 764,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
       }
     },
     {
@@ -54,7 +61,15 @@ const ListCourse = (props) => {
               <h2 className="text-base font-semibold tracking-wide">{course.danhMucKhoaHoc.tenDanhMucKhoaHoc}</h2>
               <p className="text-coolGray-800">{course.tenKhoaHoc}</p>
             </div>
-            <button type="button" className="flex items-center justify-center px-2 py-2  font-semibold tracking-wide rounded-md bg-sky-500 text-white hover:opacity-70">Đăng ký</button>
+            <button type="button" className="flex items-center justify-center px-2 py-2  font-semibold tracking-wide rounded-md bg-sky-500 text-white hover:opacity-70"
+              onClick={() => {
+                if (!localStorage.getItem(INFO_USER)) {
+                  history.push(`/dangnhap`)
+                } else {
+                  history.push(`/chitiet/${course.maKhoaHoc}`)
+                }
+              }}
+            >Đăng ký</button>
           </div>
         </div>
       </div>
@@ -62,7 +77,9 @@ const ListCourse = (props) => {
   }
   return (
     <div className="container react__slick my-14">
-      <p className="text-gray-600 w-5/6  font-extrabold  lg:text-left  mx-auto text-xl pl-3">Các khóa học mới nhất</p>
+      <p className="text-gray-600 w-5/6  font-extrabold  lg:text-left  mx-auto text-xl pl-3">Các khóa học mới nhất
+        <span className="font-extrabold text-sm animate-character  text-red-600 pl-2">HOT</span>
+      </p>
       <div className="flex justify-center">
         <Slider {...settings}>
           {renderListCourses()}

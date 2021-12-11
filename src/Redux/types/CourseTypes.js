@@ -8,3 +8,5 @@ export const GET_COURSE_FOLLOW_SEARCH = 'GET_COURSE_FOLLOW_SEARCH'; // lấy dan
 export const SEARCH = 'SEARCH'; // action tìm kiếm 
 export const EMPTY_INPUT_SEARCH = 'EMPTY_INPUT_SEARCH'; // action làm trống giá trị value
 export const GET_DETAIL_COURSE = 'GET_DETAIL_COURSE'; // action lấy chi tiết khóa học
+
+export const FILTER_COURSE = 'FILTER_COURSE' // action lọc các giá trị trùng lặp đăng ký khóa học

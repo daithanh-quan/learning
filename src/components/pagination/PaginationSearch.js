@@ -22,7 +22,7 @@ const PaginationSearch = (props) => {
   const renderListCourseSearch = () => {
     return CourseFlSearch?.map((course, index) => {
       return (index >= minIndex && index < maxIndex &&
-        <div className="bg-gradient-to-br from-sky-400 to-sky-200 flex flex-wrap md:flex-nowrap border-2 mt-5 rounded-xl" key={index}>
+        <div className=" flex flex-wrap md:flex-nowrap justify-center md:justify-start border-2  mt-5 rounded-xl bg-opacity-5 bg-black" key={index}>
           <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col relative">
             <img src={course.hinhAnh} alt="" className="w-52 h-44 object-cover rounded-lg"
               onError={(e) => { e.target.onerror = null; e.target.src = "https://picsum.photos/75/176" }}
@@ -30,10 +30,10 @@ const PaginationSearch = (props) => {
 
           </div>
           <div className="md:flex-grow">
-            <h2 className="mt-8 text-2xl font-medium text-white title-font mb-2">{course.danhMucKhoaHoc.tenDanhMucKhoaHoc}</h2>
+            <h2 className="mt-8 text-2xl font-medium text-sky-700 title-font mb-2">{course.danhMucKhoaHoc.tenDanhMucKhoaHoc}</h2>
             <p className="leading-relaxed m-0">{course.moTa.slice(0, 20)}...</p>
             <p className="leading-relaxed m-0">Tên khóa học: {course.tenKhoaHoc}</p>
-            <div className="text-indigo-500 inline-flex items-center mt-4 cursor-pointer hover:text-sky-700"
+            <div className="text-yellow-500 flex items-center mt-4 cursor-pointer hover:text-sky-700 "
               onClick={() => {
                 history.push(`/chitiet/${course.maKhoaHoc}`)
               }}

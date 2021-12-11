@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import CarouselHome from '../../components/carousel/CarouselHome'
 import ListCourse from '../../components/listCourse/ListCourse'
 import { getListCourse } from '../../Redux/action/CourseAction'
-
+import { history } from '../../App'
+import { accessToken } from '../../Redux/types/UserType'
 const Home = (props) => {
   const { listCourse } = useSelector(state => state.ListCourseReducer) // lấy danh sách khóa học từ ListCourseReducer
   const listCourseMemo = useMemo(() => listCourse, [listCourse]) // khi state thay đổi sẽ tránh render lại giao diện của component con nhận props
@@ -24,7 +25,16 @@ const Home = (props) => {
               <h2 className="text-base font-semibold tracking-wide">{course.danhMucKhoaHoc.tenDanhMucKhoaHoc}</h2>
               <p className="text-coolGray-800">{course.tenKhoaHoc.slice(0, 20)}</p>
             </div>
-            <button type="button" className="flex items-center justify-center px-2 py-2  font-semibold tracking-wide rounded-md bg-sky-500 text-white hover:opacity-70">Đăng ký</button>
+            <button type="button" className="flex items-center justify-center px-2 py-2  font-semibold tracking-wide rounded-md bg-sky-500 text-white hover:opacity-70"
+              onClick={() => {
+                if (!localStorage.getItem(accessToken)) {
+                  history.push('/dangnhap')
+                }
+                else {
+                  history.push(`/chitiet/${course.maKhoaHoc}`)
+                }
+              }}
+            >Đăng ký</button>
           </div>
         </div>
       </div>
@@ -35,7 +45,7 @@ const Home = (props) => {
       <CarouselHome />
       <ListCourse listCourse={listCourseMemo} />
       <p className="text-gray-600 w-5/6 mb-5  font-extrabold  lg:text-left  mx-auto text-xl pl-3">Các khóa học khác</p>
-      <div className="grid grid-cols-4 w-5/6 mx-auto my-8 ">
+      <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 xl:grid-cols-4  w-5/6 mx-auto my-8 ">
         {renderOtherListCourse()}
       </div>
     </div>

@@ -74,6 +74,7 @@ module.exports = {
       ping: 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
       pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       bounce: 'bounce 1s infinite',
+      scale: 'scale 0.5s infinite',
     },
     backdropBlur: (theme) => theme('blur'),
     backdropBrightness: (theme) => theme('brightness'),
@@ -481,6 +482,11 @@ module.exports = {
           animationTimingFunction: 'cubic-bezier(0,0,0.2,1)',
         },
       },
+      scale: {
+        '0%': { transform: 'scale(.4)' },
+        '50%': { transform: 'scale(.8)' },
+        '100%': { transform: 'scale(1.5)' }
+      }
     },
     letterSpacing: {
       tighter: '-0.05em',

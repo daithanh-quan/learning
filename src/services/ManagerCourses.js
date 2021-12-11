@@ -22,6 +22,14 @@ class ManagerCourses {
   getDetailCourse = (value) => {
     return http.get(`/api/QuanLyKhoaHoc/LayThongTinKhoaHoc?maKhoaHoc=${value}`)
   }
+  // đăng ký khóa học
+  registerCourse = (data) => { // data:{ ma khóa học và tài khoản }
+    return http.post(`/api/QuanLyKhoaHoc/DangKyKhoaHoc`, data)
+  }
+  // hủy ghi danh
+  deleteCourse = (data) => { // data: tài khoản và maKhoahoc
+    return http.post(`/api/QuanLyKhoaHoc/HuyGhiDanh`, data)
+  }
 }
 const managerCourse = new ManagerCourses()
 export default managerCourse
