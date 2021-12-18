@@ -1,3 +1,4 @@
+import { message } from 'antd'
 import { useFormik } from 'formik'
 import React, { useEffect } from 'react'
 import { ImStack } from 'react-icons/im'
@@ -33,6 +34,7 @@ const Login = () => {
       if (isAccountLogin && isPasswordLogin) {
         dispatch(userLoginAction(values))
         history.push('/')
+        message.success('Đăng nhập thành công')
       }
     }
   })

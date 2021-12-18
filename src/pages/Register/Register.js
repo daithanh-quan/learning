@@ -50,6 +50,7 @@ const Register = () => {
       let newValues = values
       if (isAccount === false && isEmail === false) {
         dispatch(userRegisterAction(newValues))
+        if (localStorage.getItem(INFO_USER)) return localStorage.removeItem(INFO_USER)
         localStorage.setItem(INFO_USER, JSON.stringify(newValues))
         history.push('/dangnhap')
         message.success('Đăng ký thành công')
