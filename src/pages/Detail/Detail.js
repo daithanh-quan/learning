@@ -8,7 +8,6 @@ import { history } from '../../App';
 import { getInfoUserRegistered } from '../../Redux/action/UserAction';
 const Detail = (props) => {
   const { detailCourse, describe, isLength, ListRegisteredCourse } = useSelector(state => state.DetailCourseReducer);
-  const { taiKhoan } = JSON.parse(localStorage.getItem(INFO_USER))
   const dispatch = useDispatch()
   let { id } = props.match.params
   useEffect(() => {
@@ -17,6 +16,7 @@ const Detail = (props) => {
   }, [dispatch, id])
   // hàm xử lý đăng ký khóa học
   const handleRegister = async () => {
+    const { taiKhoan } = JSON.parse(localStorage.getItem(INFO_USER))
     await dispatch(getInfoUserRegistered())
     let isRegister = await ListRegisteredCourse.some((course) => course.maKhoaHoc === id)
     if (!localStorage.getItem(accessToken)) {

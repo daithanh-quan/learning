@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { getListFlCategory } from '../../Redux/action/CourseAction'
 import { history } from '../../App'
+import { accessToken } from '../../Redux/types/UserType'
 const Category = (props) => {
 
   const { listCourseFlCategory } = useSelector(state => state.ListFollowCategoryRD)
@@ -26,7 +27,12 @@ const Category = (props) => {
         <p className="text-base leading-relaxed mt-2">Lược đăng ký học: <span className="text-yellow-500">{course.luotXem}</span></p>
         <button className="text-indigo-500 inline-flex items-center mt-3"
           onClick={() => {
-            history.push(`/chitiet/${course.maKhoaHoc}`)
+            if (!localStorage.getItem(accessToken)) {
+              history.push('/dangnhap')
+            }
+            else {
+              history.push(`/chitiet/${course.maKhoaHoc}`)
+            }
           }}
         >Xem chi tiết
           <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} className="w-4 h-4 ml-2" viewBox="0 0 24 24">

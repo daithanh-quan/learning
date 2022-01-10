@@ -24,7 +24,7 @@ var settings = { // setting để custom của thư viện slick
       }
     },
     {
-      breakpoint: 764,
+      breakpoint: 768,
       settings: {
         slidesToShow: 2,
         slidesToScroll: 2,
@@ -49,7 +49,7 @@ var settings = { // setting để custom của thư viện slick
 };
 const ListCourse = (props) => {
   const renderListCourses = () => {
-    return props.listCourse?.slice(0, 8).map((course, index) => {
+    return props.listCourse?.slice(-20, -12).map((course, index) => {
       return <div key={index} >
         <div className="max-w-xs rounded-md shadow-md mx-3 my-5 relative">
           <img src={course.hinhAnh} alt='' className="object-cover object-center w-full relative rounded-t-md h-36 top-0 "

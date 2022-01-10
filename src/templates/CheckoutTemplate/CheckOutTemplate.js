@@ -7,7 +7,7 @@ import Header from '../../components/header/Header'
 // tránh việc lặp code nếu chuyển qua nhiều trang mà có phần header và footer
 const CheckoutTemplate = (props) => {
   if (!localStorage.getItem(INFO_USER)) {
-    <Redirect to="/dangNhap" exact />
+    <Redirect to="/dangnhap" exact />
   }
   const { Component, ...restProps } = props
   return (

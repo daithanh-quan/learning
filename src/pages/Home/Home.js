@@ -13,7 +13,7 @@ const Home = (props) => {
     dispatch(getListCourse()) // dispatch action lên reducer để lấy danh sách các khóa học về
   }, [dispatch])
   const renderOtherListCourse = () => { // hàm tạo các khóa học khác
-    return listCourseMemo?.slice(8, 16).map((course, index) => {
+    return listCourseMemo?.slice(-16, -8).map((course, index) => {
       return <div key={index} className="my-2" >
         <div className="max-w-xs rounded-md shadow-md mx-3 relative">
           <img src={course.hinhAnh} alt='' className="object-cover object-center w-full relative rounded-t-md h-36 top-0 "
@@ -45,7 +45,7 @@ const Home = (props) => {
       <CarouselHome />
       <ListCourse listCourse={listCourseMemo} />
       <p className="text-gray-600 w-5/6 mb-5  font-extrabold  lg:text-left  mx-auto text-xl pl-3">Các khóa học khác</p>
-      <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 xl:grid-cols-4  w-5/6 mx-auto my-8 ">
+      <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  w-5/6 mx-auto my-8 ">
         {renderOtherListCourse()}
       </div>
     </div>

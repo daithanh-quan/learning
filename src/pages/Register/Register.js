@@ -38,7 +38,7 @@ const Register = () => {
       soDT: Yup.string().required('Điện thoại không được bỏ trống'),
       hoTen: Yup.string().required('Họ tên không được bỏ trống')
     }),
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       // dispatch lên dữ liệu để kiểm tra sự trùng email và tài khoản
       if (values) {
         dispatch({
@@ -50,7 +50,7 @@ const Register = () => {
       let newValues = values
       if (isAccount === false && isEmail === false) {
         dispatch(userRegisterAction(newValues))
-        if (localStorage.getItem(INFO_USER)) return localStorage.removeItem(INFO_USER)
+        if (localStorage.getItem(INFO_USER)) return await localStorage.removeItem(INFO_USER)
         localStorage.setItem(INFO_USER, JSON.stringify(newValues))
         history.push('/dangnhap')
         message.success('Đăng ký thành công')
