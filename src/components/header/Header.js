@@ -26,6 +26,7 @@ const Header = (props) => {
           className="font-semibold text-sm rounded-xl"
           value={course.maDanhMuc}
           key={index}
+          style={{ color: '#1890ff' }}
         >
           <NavLink to={`/madanhmuc/${course.maDanhMuc}`}>
             {course.tenDanhMuc}
@@ -52,7 +53,7 @@ const Header = (props) => {
         <NavLink to="/" exact className="hover:text-sky-400 hover:no-underline" onClick={() => {
           dispatch(getCategoryCourse())
         }}>
-          <div className="flex items-center">
+          <div className="flex items-center" style={{ color: '#1890ff' }}>
             <ImStack className="h-16 mr-2 " />
             <p className="font-extrabold text-2xl mb-0">Full stack</p>
           </div>
